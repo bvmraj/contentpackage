@@ -1,4 +1,4 @@
-package org.redquar.aem.contentpackager.core.services.impl;
+package org.redquark.aem.contentpackager.core.services.impl;
 
 import java.io.File;
 import java.util.Collections;
@@ -11,8 +11,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.osgi.service.component.annotations.Component;
-import org.redquar.aem.contentpackager.core.models.ContentFilters;
-import org.redquar.aem.contentpackager.core.services.FileReaderService;
+import org.redquark.aem.contentpackager.core.models.ContentFilters;
+import org.redquark.aem.contentpackager.core.services.FileReaderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

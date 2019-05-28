@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.redquar.aem.contentpackager.core.listeners;
+package org.redquark.aem.contentpackager.core.listeners;
 
 import org.apache.sling.api.SlingConstants;
 import org.osgi.framework.Constants;
