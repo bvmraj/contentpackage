@@ -22,6 +22,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.redquark.aem.contentpackager.core.models.ContentFilters;
 import org.redquark.aem.contentpackager.core.services.FileReaderService;
+import org.redquark.aem.contentpackager.core.services.PackagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,12 +51,20 @@ public class HandleContentPackageServlet extends SlingAllMethodsServlet {
 	@Reference
 	private FileReaderService fileReaderService;
 
+	// Injecting reference of PackagerService
+	@Reference
+	private PackagerService packagerService;
+
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) {
 
 		log.info("Invoking HandleContentPackageServlet...");
 
 		try {
+
+			// Package and Group name values
+			String packageName = EMPTY_STRING;
+			String groupName = EMPTY_STRING;
 
 			// Check if the file is multi-part
 			final boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -71,9 +80,6 @@ public class HandleContentPackageServlet extends SlingAllMethodsServlet {
 
 			// Temporary file
 			File file = null;
-			
-			// Package and Group name values
-			String packageName, groupName;
 
 			if (isMultipart) {
 
@@ -116,8 +122,15 @@ public class HandleContentPackageServlet extends SlingAllMethodsServlet {
 				// Deleting the temporary file
 				file.delete();
 
-				log.info("Users have been created successfully");
-				printWriter.println("Users have been created successfully");
+				// Calling the PackagerService to create package in AEM Package Manager
+				boolean isSuccessful = packagerService.createPackage(packageName, groupName, filters, request);
+
+				if (isSuccessful) {
+					log.info("Package has been created successfully");
+					printWriter.println("Package has been created successfully");
+				} else {
+					printWriter.println("Some error occurred. Check the logs.");
+				}
 
 			}
 		} catch (Exception e) {
