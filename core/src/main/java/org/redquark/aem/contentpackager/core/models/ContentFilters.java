@@ -1,4 +1,4 @@
-package org.redquar.aem.contentpackager.core.models;
+package org.redquark.aem.contentpackager.core.models;
 
 /**
  * @author Anirudh Sharma

@@ -14,6 +14,6 @@
  *  limitations under the License.
  */
 @Version("1.0")
-package org.redquar.aem.contentpackager.core;
+package org.redquark.aem.contentpackager.core;
 
 import org.osgi.annotation.versioning.Version;
