@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workspaceFilter version="1.0">
-    <filter root="/conf/ContentPackager" mode="merge"/>
-    <filter root="/content/ContentPackager" mode="merge"/>
-    <filter root="/content/dam/ContentPackager" mode="merge"/>
-</workspaceFilter>
