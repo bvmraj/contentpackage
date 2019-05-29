@@ -16,6 +16,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import static org.redquark.aem.contentpackager.core.constants.AppConstants.DEFAULT_GROUP;
 import org.redquark.aem.contentpackager.core.models.ContentFilters;
 import org.redquark.aem.contentpackager.core.services.PackagerService;
 import org.slf4j.Logger;
@@ -73,8 +74,15 @@ public class PackagerServiceImpl implements PackagerService {
 			// Getting the instance of the AEM's JCR package manager
 			final JcrPackageManager jcrPackageManager = packaging.getPackageManager(session);
 
-			// Creating a package with the basic details
-			JcrPackage jcrPackage = jcrPackageManager.create(groupName, packageName);
+			JcrPackage jcrPackage;
+
+			if (groupName != null && !groupName.isEmpty()) {
+				// Creating a package with the basic details
+				jcrPackage = jcrPackageManager.create(groupName, packageName);
+			} else {
+				// Creating a package with the basic details
+				jcrPackage = jcrPackageManager.create(DEFAULT_GROUP, packageName);
+			}
 
 			// Getting the package definition from the JcrPackage's instance
 			JcrPackageDefinition jcrPackageDefinition = jcrPackage.getDefinition();

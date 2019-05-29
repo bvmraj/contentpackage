@@ -7,4 +7,5 @@ package org.redquark.aem.contentpackager.core.constants;
 public final class AppConstants {
 
 	public static final String EMPTY_STRING = "";
+	public static final String DEFAULT_GROUP = "Red Quark Package Group";
 }
