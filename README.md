@@ -1,58 +1,39 @@
-# Sample AEM project template
+# Content Packager
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
+Sometimes we are given with the details of content paths in JCR (crx/de) also called filters (the same which we use to create a package in AEM via the package manager). 
 
-## Modules
+If there are multiple different paths then it becomes tedious to add each content path as a filter one by one. This utility in AEM will read the content paths in the excel file and will create a package in package manager based on that.
 
-The main parts of the template are:
-
-* core: Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
-* ui.apps: contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, templates, runmode specific configs as well as Hobbes-tests
-* ui.content: contains sample content using the components from the ui.apps
-* ui.tests: Java bundle containing JUnit tests that are executed server-side. This bundle is not to be deployed onto production.
-* ui.launcher: contains glue code that deploys the ui.tests bundle (and dependent bundles) to the server and triggers the remote JUnit execution
-
-## How to build
-
-To build all the modules run in the project root directory the following command with Maven 3:
-
-    mvn clean install
-
-If you have a running AEM instance you can build and package the whole project and deploy into AEM with  
-
-    mvn clean install -PautoInstallPackage
-    
-Or to deploy it to a publish instance, run
-
-    mvn clean install -PautoInstallPackagePublish
-    
-Or alternatively
-
-    mvn clean install -PautoInstallPackage -Daem.port=4503
-
-Or to deploy only the bundle to the author, run
-
-    mvn clean install -PautoInstallBundle
-
-## Testing
-
-There are three levels of testing contained in the project:
-
-* unit test in core: this show-cases classic unit testing of the code contained in the bundle. To test, execute:
-
-    mvn clean test
-
-* server-side integration tests: this allows to run unit-like tests in the AEM-environment, ie on the AEM server. To test, execute:
-
-    mvn clean verify -PintegrationTests
-
-* client-side Hobbes.js tests: JavaScript-based browser-side tests that verify browser-side behavior. To test:
-
-    in the browser, open the page in 'Developer mode', open the left panel and switch to the 'Tests' tab and find the generated 'MyName Tests' and run them.
+This utility contains a user interface (AEM Console) which lets you fill the package details like the package name, package group and an upload button to upload the excel file.
 
 
-## Maven settings
+## Steps to configure
 
-The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
+For this, you can refer my blog - [Create a package in AEM from Excel file entries](https://aem.redquark.org/2019/05/create-package-in-aem-from-excel-file.html)
 
-    http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+
+## How does it work?
+
+Here, we are creating following things -
+1. Custom console in the "Tools" menu of the AEM server
+2. Apache POI utility service reads the excel file and create a list containing all the content filter paths.
+3. The list creates is then passed to the package creation service which then creates users one by one using **org.apache.jackrabbit.vault.packaging** API.
+
+## Issues
+
+If you face any issues or problems, you are welcome to open issues. You can do this by following steps - 
+
+* Go to the Issues tab in the repository
+* Click on New issue button
+* Give appropriate title to the issue
+* Add detailed description of the issue and if possible, steps to reproduce
+* Click on Open issue button
+
+## How to contribute
+
+Contributions are more than welcome in this project. Below are the steps, you can follow to contribute - 
+
+* Switch to the 'develop' branch of the repository
+* Clone the develop branch in your local system
+* Make your changes
+* Open a pull request against the 'develop' branch only.
